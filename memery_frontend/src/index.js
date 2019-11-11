@@ -1,16 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    let h1 = document.getElementsByTagName("h1")[0]
     let gamesURL = "http://localhost:3000/games"
+    let usersURL = "http://localhost:3000/users"
+    let tilesURL = "http://localhost:3000/tiles"
 
-    function testFetch(){
-        fetch(gamesURL)
-        .then(resp => resp.json())
-        .then(data => {
-            data.forEach(console.log)
-        })
-    }
-
-    testFetch()
+    // var tilesArray = require("./tiles").tilesArray
+    console.log(tilesArray, tilesBack)
 
   })//end of DOM Loading
