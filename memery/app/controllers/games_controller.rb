@@ -5,4 +5,8 @@ class GamesController < ApplicationController
         render json: @games
     end
 
+    def create
+        Game.create({level: params[:level], score: params[:score]})
+    end
+
 end
