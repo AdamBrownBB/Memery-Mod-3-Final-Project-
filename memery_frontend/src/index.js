@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementsByClassName("signup-form")[0]
     let userContainer = document.getElementsByClassName("user-container")[0]
     let startButton = document.getElementById("start")
+    let gameContainer = document.getElementsByClassName("memory-game")[0]
 
     signinForm.addEventListener("submit", signinHandler)
     signupForm.addEventListener("submit", signupHandler)
@@ -66,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let sortLevel = element.games.sort(function(a, b){return a.level - b.level})
       let highestLevel = sortLevel[sortLevel.length-1].level
       levelH4.innerText = `You are on level: ${highestLevel}`
+      levelH4.dataset.level = highestLevel
 
       let scoreH4 = document.getElementById("score")
       let sortScore = element.games.sort(function(a, b){return a.score - b.score})
@@ -80,7 +82,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       //render the tiles
+      gameContainer.style.display = "block"
+      let currentLevel = event.target.parentNode.querySelector("h4").dataset.level
+      let numTiles = (parseInt(currentLevel)+2)**2
+      // console.log(numTiles)
+      let i
+      let j
+      let k
+      for (j=1; j<=2; j++){
+        for (i=0; i<((numTiles-currentLevel)/2); i++){
+          let cardDiv = document.createElement("div")
+          cardDiv.className = "memory-card"
 
+          let front = document.createElement("img")
+          front.src = tilesArray[i]
+          front.className = "front-face"
+
+          let back = document.createElement("img")
+          back.src = tileBack
+          back.className = "back-face"
+
+          cardDiv.appendChild(front)
+          cardDiv.appendChild(back)
+          gameContainer.appendChild(cardDiv)
+        }}
+      
+      for (k=0; k<currentLevel; k++){
+        let cardDiv = document.createElement("div")
+          cardDiv.className = "memory-card"
+
+          let front = document.createElement("img")
+          front.src = tileBomb
+          front.className = "front-face"
+
+          let back = document.createElement("img")
+          back.src = tileBack
+          back.className = "back-face"
+
+          cardDiv.appendChild(front)
+          cardDiv.appendChild(back)
+          gameContainer.appendChild(cardDiv)
+      }
       
       //randomize the tiles
     }
