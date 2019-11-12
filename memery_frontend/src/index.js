@@ -82,10 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       //render the tiles
+      startButton.style.display = "none"
       gameContainer.style.display = "block"
       let currentLevel = event.target.parentNode.querySelector("h4").dataset.level
       let numTiles = (parseInt(currentLevel)+2)**2
-      // console.log(numTiles)
       let i
       let j
       let k
@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
           back.src = tileBack
           back.className = "back-face"
 
+          cardDiv.addEventListener('click', flipCard)
           cardDiv.appendChild(front)
           cardDiv.appendChild(back)
           gameContainer.appendChild(cardDiv)
@@ -119,12 +120,22 @@ document.addEventListener('DOMContentLoaded', () => {
           back.src = tileBack
           back.className = "back-face"
 
+          cardDiv.addEventListener('click', flipCard)
           cardDiv.appendChild(front)
           cardDiv.appendChild(back)
           gameContainer.appendChild(cardDiv)
       }
       
       //randomize the tiles
+    }//end of start game handler
+
+    // const cards = document.querySelectorAll('.memory-card');
+
+    function flipCard() {
+      console.log("flipping")
+      this.classList.toggle('flip');
     }
+
+    // cards.forEach(card => card.addEventListener('click', flipCard))
 
   })//end of DOM Loading
