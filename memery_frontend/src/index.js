@@ -129,13 +129,23 @@ document.addEventListener('DOMContentLoaded', () => {
       //randomize the tiles
     }//end of start game handler
 
-    // const cards = document.querySelectorAll('.memory-card');
+    let firstCard
+    let secondCard
 
-    function flipCard() {
-      console.log("flipping")
+    function flipCard(event) {
       this.classList.toggle('flip');
+      if (!firstCard && !secondCard) {
+        firstCard = event.target.parentNode.getElementsByClassName("front-face")[0]
+        console.log(firstCard)
+      } else if (firstCard && !secondCard){
+        secondCard = event.target.parentNode.getElementsByClassName("front-face")[0]
+        console.log(secondCard)
+      } 
+      // else if (firstCard && secondCard){
+      //   firstCard.parentNode.flipCard()
+      // }
     }
 
-    // cards.forEach(card => card.addEventListener('click', flipCard))
+
 
   })//end of DOM Loading

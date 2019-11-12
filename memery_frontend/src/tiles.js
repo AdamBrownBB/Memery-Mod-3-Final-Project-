@@ -3,7 +3,7 @@ let tilesArray = [
 "https://media.giphy.com/media/ZbUIi5RuPahtCN90OL/giphy.gif",
 "https://media.giphy.com/media/l3mZdSnHSavSnJdEk/giphy.gif",
 "https://media.giphy.com/media/QQAF6WHwL11m0/giphy.gif",
-"https://media.giphy.com/media/l3mZdSnHSavSnJdEk/giphy.gif",
+"https://media.giphy.com/media/maCYwFHEKweaY/giphy.gif",
 "https://media.giphy.com/media/3o6ZtoUP01FNWHjL6U/giphy.gif",
 "https://media.giphy.com/media/NGQNIxdYRJzOM/giphy.gif",
 "https://media.giphy.com/media/23a74P9V6FCvK/giphy.gif",
