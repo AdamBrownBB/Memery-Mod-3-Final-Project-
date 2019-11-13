@@ -9,12 +9,23 @@
     display: flex;
     background: rgb(255, 255, 255);
   }
+
+  .app{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .signin-container{
+    padding-top: 10vh;
+  }
   
   .memory-game {
     width: 640px;
     height: 640px;
     margin: auto;
-    display: grid;
+    display: flex;
     flex-wrap: wrap;
     perspective: 1000px;
   }

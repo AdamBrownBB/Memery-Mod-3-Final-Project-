@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let userContainer = document.getElementsByClassName("user-container")[0]
     let startButton = document.getElementById("start")
     let gameContainer = document.getElementsByClassName("memory-game")[0]
+    let firstCard
+    let secondCard
+    let matchCounter=0
+
 
     signinForm.addEventListener("submit", signinHandler)
     signupForm.addEventListener("submit", signupHandler)
@@ -83,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       //render the tiles
       startButton.style.display = "none"
-      gameContainer.style.display = "block"
+      gameContainer.style.display = "flex"
       let currentLevel = event.target.parentNode.querySelector("h4").dataset.level
       let numTiles = (parseInt(currentLevel)+2)**2
       let i
@@ -129,9 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
       //randomize the tiles
     }//end of start game handler
 
-    let firstCard
-    let secondCard
 
+    
     function flipCard(event) {
       this.classList.toggle('flip');
       if (!firstCard && !secondCard) {
@@ -140,10 +143,28 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (firstCard && !secondCard){
         secondCard = event.target.parentNode.getElementsByClassName("front-face")[0]
         console.log(secondCard)
+          if (firstCard.src===secondCard.src){
+            console.log("match")
+            //disable click handler
+            firstCard.parentNode.removeEventListener("click", flipCard)
+            secondCard.parentNode.removeEventListener("click", flipCard)
+            //reset both cards
+            firstCard = undefined
+            secondCard = undefined
+            matchCounter++
+            console.log(matchCounter)
+          } else {
+            //sleep for 2 seconds
+            setTimeout(() => {
+              //unflip both cards
+              firstCard.parentNode.classList.toggle('flip');
+              secondCard.parentNode.classList.toggle('flip');
+              //reset both cards
+              firstCard = undefined
+              secondCard = undefined
+            }, 2000)
+          }
       } 
-      // else if (firstCard && secondCard){
-      //   firstCard.parentNode.flipCard()
-      // }
     }
 
 
