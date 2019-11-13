@@ -153,15 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function flipCard(event) {
       this.classList.toggle('flip');
-      console.log(matchCounter)
       if (!firstCard && !secondCard) {
         firstCard = event.target.parentNode.getElementsByClassName("front-face")[0]
-        console.log(firstCard)
       } else if (firstCard && !secondCard){
         secondCard = event.target.parentNode.getElementsByClassName("front-face")[0]
-        console.log(secondCard)
           if (firstCard.src===secondCard.src){
-            console.log("match")
             //disable click handler
             firstCard.parentNode.removeEventListener("click", flipCard)
             secondCard.parentNode.removeEventListener("click", flipCard)
@@ -169,7 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
             firstCard = undefined
             secondCard = undefined
             matchCounter++
-            if (matchCounter===(((parseInt(levelH4.dataset.level)+2)**2-levelH4.dataset.level)/2)){
+            console.log(matchCounter)
+            if (matchCounter===(((parseInt(currentLevel)+2)**2-currentLevel)/2)){
+              console.log(matchCounter)
               win()
             }
           } else {
@@ -219,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gameContainer.appendChild(winMessageDiv)
 
       //resets match counter to 0
+      levelH4.innerText = `You are on level: ${currentLevel}`
       matchCounter = 0
     }
 
