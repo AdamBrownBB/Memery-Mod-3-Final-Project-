@@ -12,9 +12,6 @@ user2 = User.create(name: "Jinming")
 
 game1 = Game.create(user: user1, level: 1, score: 0)
 game2 = Game.create(user: user2, level: 1, score: 10)
-game3 = Game.create(user: user1, level: 3, score: 100)
-game4 = Game.create(user: user1, level: 4, score: 4)
-game5 = Game.create(user: user1, level: 2, score: 20)
-
-tile1 = Tile.create(game: game1, url: "https://media.giphy.com/media/STYcRDzNO6AYNmMgvA/giphy.gif")
-tile2 = Tile.create(game: game2, url: "https://media.giphy.com/media/kFCkZlBN1ub3iUuRDz/giphy.gif")
+# game3 = Game.create(user: user1, level: 3, score: 100)
+# game4 = Game.create(user: user1, level: 4, score: 4)
+# game5 = Game.create(user: user1, level: 2, score: 20)

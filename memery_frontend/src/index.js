@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let userContainer = document.getElementsByClassName("user-container")[0]
     let startButton = document.getElementById("start")
     let gameContainer = document.getElementsByClassName("memory-game")[0]
+    let userH3 = document.getElementById("user-name")
     let levelH4 = document.getElementById("level")
     let firstCard
     let secondCard
@@ -65,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
       signupForm.style.display = "none"
       userContainer.style.display = "block"
 
-      let userH3 = document.getElementById("user-name")
       userH3.innerText = `Welcome, ${element.name}`
+      userH3.dataset.id = element.id
 
       let highestLevel
       let highestScore
@@ -165,9 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
             secondCard = undefined
             matchCounter++
             if (matchCounter===(((parseInt(levelH4.dataset.level)+2)**2-levelH4.dataset.level)/2)){
-              console.log("won")
+              win()
             }
-            console.log(matchCounter)
           } else {
             //sleep for 2 seconds
             setTimeout(() => {
@@ -180,6 +180,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2000)
           }
       } 
+    }//end of flip card fn
+
+    function win(){
+      //level counter++
+      let currentLevel = parseInt(levelH4.dataset.level)
+      currentLevel++
+      let userID = userH3.dataset.id
+      let newGameObj = {
+        level: currentLevel,
+        score: 0,     //need to come up with scoring logic
+        user_id: userID}
+        console.log(newGameObj)
+
+      fetch(gamesURL,{
+        method: "POST",
+        headers:{
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(newGameObj)
+      })
+      //fetch POST to /games
+      //show a message
+      //show a button for next game
+      //--reset match counter
+      //hide game container
+      //-- gameContainer.removeChildren()
     }
 
 
