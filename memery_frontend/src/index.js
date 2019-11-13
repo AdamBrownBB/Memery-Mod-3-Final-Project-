@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let firstCard
     let secondCard
     let matchCounter=0
+    let currentLevel
 
 
     signinForm.addEventListener("submit", signinHandler)
@@ -86,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       levelH4.innerText = `You are on level: ${highestLevel}`
       levelH4.dataset.level = highestLevel
+      currentLevel = parseInt(levelH4.dataset.level)
 
       let scoreH4 = document.getElementById("score")
       scoreH4.innerText = `Your score is: ${highestScore}`
@@ -100,8 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
       //render the tiles
       startButton.style.display = "none"
       gameContainer.style.display = "flex"
-      let currentLevel = event.target.parentNode.querySelector("h4").dataset.level
-      let numTiles = (parseInt(currentLevel)+2)**2
+      gameContainer.innerHTML = ""
+      console.log(currentLevel)
+      // let currentLevel = event.target.parentNode.querySelector("h4").dataset.level
+      let numTiles = (currentLevel+2)**2
       let i
       let j
       let k
@@ -184,8 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function win(){
       //level counter++
-      let currentLevel = parseInt(levelH4.dataset.level)
-      currentLevel++
+      currentLevel = currentLevel + 1
       let userID = userH3.dataset.id
       let newGameObj = {
         level: currentLevel,
@@ -193,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         user_id: userID}
         console.log(newGameObj)
 
+      //fetch POST to /games
       fetch(gamesURL,{
         method: "POST",
         headers:{
@@ -201,12 +205,21 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify(newGameObj)
       })
-      //fetch POST to /games
+
       //show a message
-      //show a button for next game
-      //--reset match counter
-      //hide game container
-      //-- gameContainer.removeChildren()
+      startButton.style.display = "block"
+
+      gameContainer.innerHTML = ""
+      let winMessageDiv = document.createElement("div")
+      winMessageDiv.className = "win-message"
+
+      let winMessage = document.createElement("h1")
+      winMessage.innerText = "YOU WON! Click Start Game button for a new game"
+      winMessageDiv.appendChild(winMessage)
+      gameContainer.appendChild(winMessageDiv)
+
+      //resets match counter to 0
+      matchCounter = 0
     }
 
 
