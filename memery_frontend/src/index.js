@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let userContainer = document.getElementsByClassName("user-container")[0]
     let startButton = document.getElementById("start")
     let gameContainer = document.getElementsByClassName("memory-game")[0]
+    let levelH4 = document.getElementById("level")
     let firstCard
     let secondCard
     let matchCounter=0
@@ -67,15 +68,25 @@ document.addEventListener('DOMContentLoaded', () => {
       let userH3 = document.getElementById("user-name")
       userH3.innerText = `Welcome, ${element.name}`
 
-      let levelH4 = document.getElementById("level")
-      let sortLevel = element.games.sort(function(a, b){return a.level - b.level})
-      let highestLevel = sortLevel[sortLevel.length-1].level
+      let highestLevel
+      let highestScore
+
+      if (!element.games){
+        highestLevel = 1
+        highestScore = 0
+      } else{
+        let sortLevel = element.games.sort(function(a, b){return a.level - b.level})
+        highestLevel = sortLevel[sortLevel.length-1].level
+        
+        let sortScore = element.games.sort(function(a, b){return a.score - b.score})
+        highestScore = sortScore[sortScore.length-1].score //maybe revisit later to use score sum as high score
+      }
+
+      
       levelH4.innerText = `You are on level: ${highestLevel}`
       levelH4.dataset.level = highestLevel
 
       let scoreH4 = document.getElementById("score")
-      let sortScore = element.games.sort(function(a, b){return a.score - b.score})
-      let highestScore = sortScore[sortScore.length-1].score //maybe revisit later to use score sum as high score
       scoreH4.innerText = `Your score is: ${highestScore}`
     }
 
@@ -137,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function flipCard(event) {
       this.classList.toggle('flip');
+      console.log(matchCounter)
       if (!firstCard && !secondCard) {
         firstCard = event.target.parentNode.getElementsByClassName("front-face")[0]
         console.log(firstCard)
@@ -152,6 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
             firstCard = undefined
             secondCard = undefined
             matchCounter++
+            if (matchCounter===(((parseInt(levelH4.dataset.level)+2)**2-levelH4.dataset.level)/2)){
+              console.log("won")
+            }
             console.log(matchCounter)
           } else {
             //sleep for 2 seconds
