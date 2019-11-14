@@ -149,10 +149,11 @@ document.addEventListener('DOMContentLoaded', () => {
       //shuffle cards
       (function shuffleCards() {
         
-        cards.forEach(card => {
-          let ramdomPos = Math.floor(Math.random() * cards.length);
-          card.style.order = ramdomPos;
-        });
+        // cards.forEach(card => {
+        //   let ramdomPos = Math.floor(Math.random() * cards.length);
+        //   card.style.order = ramdomPos;
+        // });
+        cards = []
       })()//end of shuffleCards
 
     }//end of render cards function
@@ -161,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function flipCard(event) {
       this.classList.toggle('flip');
+
       if (!firstCard && !secondCard) {
         firstCard = event.target.parentNode.getElementsByClassName("front-face")[0]
         if (firstCard.src === tileBomb){
@@ -174,7 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (firstCard.src===secondCard.src){
           //disable click handler
           firstCard.parentNode.removeEventListener("click", flipCard)
+          firstCard.parentNode.dataset.match = true
           secondCard.parentNode.removeEventListener("click", flipCard)
+          secondCard.parentNode.dataset.match = true
+          console.log("first card:", firstCard.parentNode.dataset.match, "second card: ", firstCard.parentNode.dataset.match)
           //reset both cards
           firstCard = undefined
           secondCard = undefined
@@ -191,6 +196,13 @@ document.addEventListener('DOMContentLoaded', () => {
           lose()
         }
         else {
+          let cardsArray = Array.from(gameContainer.children)
+          console.log(cardsArray)
+          cardsArray.forEach(function(element){
+            if (!element.dataset.match){
+              element.removeEventListener("click", flipCard)
+            }
+          })
           //sleep for 2 seconds
           setTimeout(() => {
             //unflip both cards
@@ -199,6 +211,11 @@ document.addEventListener('DOMContentLoaded', () => {
             //reset both cards
             firstCard = undefined
             secondCard = undefined
+            cardsArray.forEach(function(element){
+            if (!element.dataset.match){
+              element.addEventListener("click", flipCard)
+              }
+            })
           }, 2000)
         }
       } 
