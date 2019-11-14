@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
       startButton.style.display = "none"
       gameContainer.style.display = "flex"
       gameContainer.innerHTML = ""
-      console.log(currentLevel)
+      console.log("current level:", currentLevel)
       // let currentLevel = event.target.parentNode.querySelector("h4").dataset.level
       let numTiles = (currentLevel+2)**2
       let i
@@ -155,32 +155,44 @@ document.addEventListener('DOMContentLoaded', () => {
       this.classList.toggle('flip');
       if (!firstCard && !secondCard) {
         firstCard = event.target.parentNode.getElementsByClassName("front-face")[0]
-      } else if (firstCard && !secondCard){
+        if (firstCard.src === tileBomb){
+          firstCard=undefined
+          lose()
+        }
+      } 
+      else if (firstCard && !secondCard){
         secondCard = event.target.parentNode.getElementsByClassName("front-face")[0]
-          if (firstCard.src===secondCard.src){
-            //disable click handler
-            firstCard.parentNode.removeEventListener("click", flipCard)
-            secondCard.parentNode.removeEventListener("click", flipCard)
+        
+        if (firstCard.src===secondCard.src){
+          //disable click handler
+          firstCard.parentNode.removeEventListener("click", flipCard)
+          secondCard.parentNode.removeEventListener("click", flipCard)
+          //reset both cards
+          firstCard = undefined
+          secondCard = undefined
+          matchCounter++
+          console.log("match counter:", matchCounter)
+          if (matchCounter===(((parseInt(currentLevel)+2)**2-currentLevel)/2)){
+            console.log("match counter:", matchCounter)
+            win()
+          }
+        } 
+        else if (secondCard.src === tileBomb){
+          firstCard=undefined
+          secondCard=undefined
+          lose()
+        }
+        else {
+          //sleep for 2 seconds
+          setTimeout(() => {
+            //unflip both cards
+            firstCard.parentNode.classList.toggle('flip');
+            secondCard.parentNode.classList.toggle('flip');
             //reset both cards
             firstCard = undefined
             secondCard = undefined
-            matchCounter++
-            console.log(matchCounter)
-            if (matchCounter===(((parseInt(currentLevel)+2)**2-currentLevel)/2)){
-              console.log(matchCounter)
-              win()
-            }
-          } else {
-            //sleep for 2 seconds
-            setTimeout(() => {
-              //unflip both cards
-              firstCard.parentNode.classList.toggle('flip');
-              secondCard.parentNode.classList.toggle('flip');
-              //reset both cards
-              firstCard = undefined
-              secondCard = undefined
-            }, 2000)
-          }
+          }, 2000)
+        }
       } 
     }//end of flip card fn
 
@@ -218,6 +230,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
       //resets match counter to 0
       levelH4.innerText = `You are on level: ${currentLevel}`
+      matchCounter = 0
+    } //end of win function
+
+    function lose() {
+      //invoke this fn via bomb logic
+      //make the Start button show again
+      //show a banner: you hit the bomb, to play again, press Start
+      startButton.style.display = "block"
+
+      gameContainer.innerHTML = ""
+
+      let loseMessageDiv = document.createElement("div")
+      loseMessageDiv.className = "lose-message"
+      let loseMessage = document.createElement("h1")
+      loseMessage.innerText = "YOU HIT THE BOMB! Game over, click Start Game button to try again"
+      loseMessageDiv.appendChild(loseMessage)
+
+      let bombGifDiv = document.createElement("div")
+      bombGifDiv.className = "bomb-div"
+      let bombImg = document.createElement("img")
+      bombImg.src = tileBomb
+      bombGifDiv.appendChild(bombImg)
+
+      gameContainer.appendChild(loseMessageDiv)
+      gameContainer.appendChild(bombGifDiv)
+
+      //no change to currentLevel var
+      // levelH4.innerText = `You are on level: ${currentLevel}`
+      //resets match counter to 0
       matchCounter = 0
     }
 
