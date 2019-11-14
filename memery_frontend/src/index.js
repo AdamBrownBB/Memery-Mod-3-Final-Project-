@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementsByClassName("signup-form")[0]
     let userContainer = document.getElementsByClassName("user-container")[0]
     let startButton = document.getElementById("start")
-    let gameContainer = document.getElementsByClassName("memory-game")[0]
+    let gameContainer = document.querySelector("section[data-name=memory-game]")
     let userH3 = document.getElementById("user-name")
     let levelH4 = document.getElementById("level")
     let scoreH4 = document.getElementById("score")
@@ -87,8 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let scoreArray = []
         element.games.forEach(function(game){scoreArray.push(game.score)})
-        highestScore = scoreArray.reduce((a,b) => a + b, 0) //maybe revisit later to use score sum as high score
-        console.log(highestScore)
+        highestScore = scoreArray.reduce((a,b) => a + b, 0)
       }
 
       
@@ -104,14 +103,25 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCards(){
       //render the tiles
       scoreH4.innerText = `Your score is: ${highestScore+currentScore}`
-      console.log("highest:", highestScore, "current:", currentScore)
       startButton.style.display = "none"
-      gameContainer.style.display = "flex"
+      gameContainer.style.display = "grid"
       gameContainer.innerHTML = ""
-      console.log("current level:", currentLevel)
+      switch (currentLevel) {
+        case 1:
+          gameContainer.className = "memory-level-one"
+          break;
+        case 2:
+          gameContainer.className = "memory-level-two"
+          break;
+        case 3:
+          gameContainer.className = "memory-level-three"
+          break;
+        case 4:
+          gameContainer.className = "memory-level-four"
+          break;
+      }
       let numTiles = (currentLevel+2)**2
       currentScore = numTiles*10
-      console.log("initial score:", currentScore)
 
       let winMessageDiv = document.createElement("div")
       winMessageDiv.className = "win-message"
@@ -181,12 +191,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function flipCard(event) {
       this.classList.toggle('flip');
       currentScore = currentScore - 5 //deducts 5 points per click
-      console.log("current score:", currentScore)
 
       if (!firstCard && !secondCard) {
         firstCard = event.target.parentNode.querySelector("img[data-name=front]")
         firstCard.parentNode.removeEventListener("click", flipCard)
-        console.log("first card:", firstCard)
+
         if (firstCard.src === tileBomb){
           firstCard=undefined
           lose()
@@ -195,8 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (firstCard && !secondCard){
         secondCard = event.target.parentNode.querySelector("img[data-name=front]")
         secondCard.parentNode.removeEventListener("click", flipCard)
-
-        console.log("second card:", secondCard)
         
         if (firstCard.src===secondCard.src){
           //disable click handler
@@ -206,12 +213,12 @@ document.addEventListener('DOMContentLoaded', () => {
           secondCard.parentNode.removeEventListener("click", flipCard)
           secondCard.parentNode.dataset.match = true
           secondCard.dataset.name = "anything"
-          console.log("first card matched:", firstCard.parentNode.dataset.match, "second card matched: ", firstCard.parentNode.dataset.match)
+
           //reset both cards
           firstCard = undefined
           secondCard = undefined
           matchCounter++
-          console.log("match counter:", matchCounter)
+
           if (matchCounter===(((parseInt(currentLevel)+2)**2-currentLevel)/2)){
             win()
           }
@@ -223,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         else {
           let cardsArray = Array.from(gameContainer.children)
-          console.log("no match")
+
           cardsArray.forEach(function(element){
             if (!element.dataset.match){
               element.removeEventListener("click", flipCard)
@@ -255,7 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
         level: currentLevel,
         score: currentScore,     //need to come up with scoring logic
         user_id: userID}
-        console.log(newGameObj)
 
       //fetch POST to /games
       fetch(gamesURL, {

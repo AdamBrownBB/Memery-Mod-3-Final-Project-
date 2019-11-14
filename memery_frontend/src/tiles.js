@@ -17,5 +17,5 @@ let tilesArray = [
 "https://static01.nyt.com/images/2016/08/05/us/05onfire1_xp/05onfire1_xp-facebookJumbo.jpg"]
 
 
-let tileBack = "http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg"
+let tileBack = "./images/card-BACK.svg"
 let tileBomb = "https://media.giphy.com/media/ctomQewXM0vVm/giphy.gif"

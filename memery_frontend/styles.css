@@ -13,26 +13,63 @@
   .app{
     display: flex;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+    position: relative;
   }
 
   .signin-container{
     padding-top: 10vh;
   }
   
-  .memory-game {
+  /* .memory-game {
     width: 640px;
-    height: 640px;
+    height: 1040px;
     margin: auto;
     display: grid;
-    flex-wrap: wrap;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    perspective: 1000px;
+  } */
+
+  .memory-level-one {
+    width: 640px;
+    height: 1040px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    perspective: 1000px;
+  }
+
+  .memory-level-two {
+    width: 640px;
+    height: 1040px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     perspective: 1000px;
   }
   
+  .memory-level-three {
+    width: 640px;
+    height: 1040px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    perspective: 1000px;
+  }
+
+  .memory-level-four {
+    width: 640px;
+    height: 1040px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    perspective: 1000px;
+  }
+
   .memory-card {
-    width: calc(25% - 10px);
-    height: calc(33.333% - 10px);
+    width: 80%;
+    height: 80%;
     margin: 5px;
     position: relative;
     transform: scale(1);
@@ -53,11 +90,12 @@
   .back-face {
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: 5px;
     position: absolute;
-    border-radius: 5px;
+    border-radius: 10px;
     background: rgb(255, 255, 255);
     backface-visibility: hidden;
+    object-fit: cover;
   }
   
   .front-face {
