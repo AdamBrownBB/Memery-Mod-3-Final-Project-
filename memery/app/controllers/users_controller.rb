@@ -6,10 +6,10 @@ class UsersController < ApplicationController
     end
 
     def create
-        User.create({name: params[:name]})
+        user = User.create({name: params[:name]})
+        render json: user
     end
 
-    private
 
 
 end

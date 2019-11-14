@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(data => {
         renderUserInfo(data)
       })
+      
       event.target.reset()
     }
 

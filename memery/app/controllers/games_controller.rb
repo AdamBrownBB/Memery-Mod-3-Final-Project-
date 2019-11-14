@@ -6,7 +6,6 @@ class GamesController < ApplicationController
     end
 
     def create
-        # byebug
         Game.create({level: params[:level], score: params[:score], user_id: params[:user_id]})
     end
 
