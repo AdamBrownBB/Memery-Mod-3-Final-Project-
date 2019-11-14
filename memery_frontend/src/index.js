@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let secondCard
     let matchCounter=0
     let currentLevel
+    let cards = []
 
 
     signinForm.addEventListener("submit", signinHandler)
@@ -93,18 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
       scoreH4.innerText = `Your score is: ${highestScore}`
     }
 
-    startButton.addEventListener("click", startHandler)
+    startButton.addEventListener("click", renderCards)
 
-    function startHandler(event){
-      //create new game instance in DB
-
-
+    function renderCards(event){
       //render the tiles
       startButton.style.display = "none"
       gameContainer.style.display = "flex"
       gameContainer.innerHTML = ""
       console.log("current level:", currentLevel)
-      // let currentLevel = event.target.parentNode.querySelector("h4").dataset.level
       let numTiles = (currentLevel+2)**2
       let i
       let j
@@ -126,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
           cardDiv.appendChild(front)
           cardDiv.appendChild(back)
           gameContainer.appendChild(cardDiv)
+          cards.push(cardDiv)
         }}
       
       for (k=0; k<currentLevel; k++){
@@ -144,10 +142,20 @@ document.addEventListener('DOMContentLoaded', () => {
           cardDiv.appendChild(front)
           cardDiv.appendChild(back)
           gameContainer.appendChild(cardDiv)
+          cards.push(cardDiv)
+          console.log(cards)
       }
-      
-      //randomize the tiles
-    }//end of start game handler
+
+      //shuffle cards
+      (function shuffleCards() {
+        
+        cards.forEach(card => {
+          let ramdomPos = Math.floor(Math.random() * cards.length);
+          card.style.order = ramdomPos;
+        });
+      })()//end of shuffleCards
+
+    }//end of render cards function
 
 
     
@@ -216,17 +224,18 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(newGameObj)
       })
 
-      //show a message
-      startButton.style.display = "block"
+      //show a message after delay
+      setTimeout(() => {
+        startButton.style.display = "block"
+        gameContainer.innerHTML = ""
+        let winMessageDiv = document.createElement("div")
+        winMessageDiv.className = "win-message"
 
-      gameContainer.innerHTML = ""
-      let winMessageDiv = document.createElement("div")
-      winMessageDiv.className = "win-message"
-
-      let winMessage = document.createElement("h1")
-      winMessage.innerText = "YOU WON! Click Start Game button for a new game"
-      winMessageDiv.appendChild(winMessage)
-      gameContainer.appendChild(winMessageDiv)
+        let winMessage = document.createElement("h1")
+        winMessage.innerText = "YOU WON! Click Start Game button for a new game"
+        winMessageDiv.appendChild(winMessage)
+        gameContainer.appendChild(winMessageDiv)
+      }, 2000);
 
       //resets match counter to 0
       levelH4.innerText = `You are on level: ${currentLevel}`
@@ -256,11 +265,9 @@ document.addEventListener('DOMContentLoaded', () => {
       gameContainer.appendChild(loseMessageDiv)
       gameContainer.appendChild(bombGifDiv)
 
-      //no change to currentLevel var
-      // levelH4.innerText = `You are on level: ${currentLevel}`
       //resets match counter to 0
       matchCounter = 0
-    }
+    }//end of lose function
 
 
 
