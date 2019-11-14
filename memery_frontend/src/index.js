@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
           let front = document.createElement("img")
           front.src = tilesArray[i]
           front.className = "front-face"
+          front.dataset.name = "front"
 
           let back = document.createElement("img")
           back.src = tileBack
@@ -164,29 +165,35 @@ document.addEventListener('DOMContentLoaded', () => {
       this.classList.toggle('flip');
 
       if (!firstCard && !secondCard) {
-        firstCard = event.target.parentNode.getElementsByClassName("front-face")[0]
+        firstCard = event.target.parentNode.querySelector("img[data-name=front]")
+        firstCard.parentNode.removeEventListener("click", flipCard)
+        console.log("first card:", firstCard)
         if (firstCard.src === tileBomb){
           firstCard=undefined
           lose()
         }
       } 
       else if (firstCard && !secondCard){
-        secondCard = event.target.parentNode.getElementsByClassName("front-face")[0]
+        secondCard = event.target.parentNode.querySelector("img[data-name=front]")
+        secondCard.parentNode.removeEventListener("click", flipCard)
+
+        console.log("second card:", secondCard)
         
         if (firstCard.src===secondCard.src){
           //disable click handler
           firstCard.parentNode.removeEventListener("click", flipCard)
           firstCard.parentNode.dataset.match = true
+          firstCard.dataset.name = "anything"
           secondCard.parentNode.removeEventListener("click", flipCard)
           secondCard.parentNode.dataset.match = true
-          console.log("first card:", firstCard.parentNode.dataset.match, "second card: ", firstCard.parentNode.dataset.match)
+          secondCard.dataset.name = "anything"
+          console.log("first card matched:", firstCard.parentNode.dataset.match, "second card matched: ", firstCard.parentNode.dataset.match)
           //reset both cards
           firstCard = undefined
           secondCard = undefined
           matchCounter++
           console.log("match counter:", matchCounter)
           if (matchCounter===(((parseInt(currentLevel)+2)**2-currentLevel)/2)){
-            console.log("match counter:", matchCounter)
             win()
           }
         } 
@@ -197,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         else {
           let cardsArray = Array.from(gameContainer.children)
-          console.log(cardsArray)
+          console.log("no match")
           cardsArray.forEach(function(element){
             if (!element.dataset.match){
               element.removeEventListener("click", flipCard)
