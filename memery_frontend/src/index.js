@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let gamesURL = "http://localhost:3000/games"
     let usersURL = "http://localhost:3000/users"
-    let tilesURL = "http://localhost:3000/tiles"
     const signinForm = document.getElementsByClassName("signin-form")[0]
     const signupForm = document.getElementsByClassName("signup-form")[0]
     let userContainer = document.getElementsByClassName("user-container")[0]
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     signinForm.addEventListener("submit", signinHandler)
     signupForm.addEventListener("submit", signupHandler)
-    // console.log(form)
 
     function signinHandler(event){
       event.preventDefault()
@@ -74,10 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
       let highestLevel
       let highestScore
 
-      if (!element.games){
+      if (element.games.length == 0){
         highestLevel = 1
         highestScore = 0
-      } else{
+      } 
+      else {
         let sortLevel = element.games.sort(function(a, b){return a.level - b.level})
         highestLevel = sortLevel[sortLevel.length-1].level
         
@@ -144,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
           cardDiv.appendChild(back)
           gameContainer.appendChild(cardDiv)
           cards.push(cardDiv)
-          console.log(cards)
       }
 
       //shuffle cards
@@ -239,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(newGameObj)
 
       //fetch POST to /games
-      fetch(gamesURL,{
+      fetch(gamesURL, {
         method: "POST",
         headers:{
           "Content-Type": "application/json",
@@ -267,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } //end of win function
 
     function lose() {
-      //invoke this fn via bomb logic
       //make the Start button show again
       //show a banner: you hit the bomb, to play again, press Start
       startButton.style.display = "block"
@@ -292,7 +289,5 @@ document.addEventListener('DOMContentLoaded', () => {
       //resets match counter to 0
       matchCounter = 0
     }//end of lose function
-
-
 
   })//end of DOM Loading
