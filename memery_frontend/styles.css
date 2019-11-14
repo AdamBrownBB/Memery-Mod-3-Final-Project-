@@ -64,3 +64,8 @@
   .front-face {
     transform: rotateY(180deg);
   }
+
+  .win-message {
+      position: top;
+    z-index: 10000;
+  }

@@ -9,11 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let gameContainer = document.getElementsByClassName("memory-game")[0]
     let userH3 = document.getElementById("user-name")
     let levelH4 = document.getElementById("level")
+    let scoreH4 = document.getElementById("score")
     let firstCard
     let secondCard
     let matchCounter=0
     let currentLevel
     let cards = []
+    let currentScore = 0
+    let highestScore
+
 
 
     signinForm.addEventListener("submit", signinHandler)
@@ -71,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
       userH3.dataset.id = element.id
 
       let highestLevel
-      let highestScore
+      
 
       if (element.games.length == 0){
         highestLevel = 1
@@ -81,8 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let sortLevel = element.games.sort(function(a, b){return a.level - b.level})
         highestLevel = sortLevel[sortLevel.length-1].level
         
-        let sortScore = element.games.sort(function(a, b){return a.score - b.score})
-        highestScore = sortScore[sortScore.length-1].score //maybe revisit later to use score sum as high score
+        let scoreArray = []
+        element.games.forEach(function(game){scoreArray.push(game.score)})
+        highestScore = scoreArray.reduce((a,b) => a + b, 0) //maybe revisit later to use score sum as high score
+        console.log(highestScore)
       }
 
       
@@ -90,19 +96,31 @@ document.addEventListener('DOMContentLoaded', () => {
       levelH4.dataset.level = highestLevel
       currentLevel = parseInt(levelH4.dataset.level)
 
-      let scoreH4 = document.getElementById("score")
       scoreH4.innerText = `Your score is: ${highestScore}`
     }
 
     startButton.addEventListener("click", renderCards)
 
-    function renderCards(event){
+    function renderCards(){
       //render the tiles
+      scoreH4.innerText = `Your score is: ${highestScore+currentScore}`
+      console.log("highest:", highestScore, "current:", currentScore)
       startButton.style.display = "none"
       gameContainer.style.display = "flex"
       gameContainer.innerHTML = ""
       console.log("current level:", currentLevel)
       let numTiles = (currentLevel+2)**2
+      currentScore = numTiles*10
+      console.log("initial score:", currentScore)
+
+      let winMessageDiv = document.createElement("div")
+      winMessageDiv.className = "win-message"
+
+      let winMessage = document.createElement("h1")
+      winMessageDiv.appendChild(winMessage)
+      gameContainer.appendChild(winMessageDiv)
+      winMessageDiv.style.display = "none"
+
       let i
       let j
       let k
@@ -162,6 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function flipCard(event) {
       this.classList.toggle('flip');
+      currentScore = currentScore - 5 //deducts 5 points per click
+      console.log("current score:", currentScore)
 
       if (!firstCard && !secondCard) {
         firstCard = event.target.parentNode.querySelector("img[data-name=front]")
@@ -233,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let userID = userH3.dataset.id
       let newGameObj = {
         level: currentLevel,
-        score: 0,     //need to come up with scoring logic
+        score: currentScore,     //need to come up with scoring logic
         user_id: userID}
         console.log(newGameObj)
 
@@ -248,17 +268,15 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       //show a message after delay
-      setTimeout(() => {
+      // setTimeout(() => {
         startButton.style.display = "block"
-        gameContainer.innerHTML = ""
-        let winMessageDiv = document.createElement("div")
-        winMessageDiv.className = "win-message"
 
-        let winMessage = document.createElement("h1")
-        winMessage.innerText = "YOU WON! Click Start Game button for a new game"
-        winMessageDiv.appendChild(winMessage)
-        gameContainer.appendChild(winMessageDiv)
-      }, 2000);
+        let winMessageDiv = document.getElementsByClassName("win-message")[0]
+        winMessageDiv.children[0].innerHTML = `YOU WON! <br> You scored ${currentScore} points!!! <br> Click Start Game button to go to the next level <br>`
+        winMessageDiv.style.display = "block"
+        // gameContainer.innerHTML = ""
+        
+      // }, 2000);
 
       //resets match counter to 0
       levelH4.innerText = `You are on level: ${currentLevel}`
