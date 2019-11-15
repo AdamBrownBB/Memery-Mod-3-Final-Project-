@@ -43,7 +43,9 @@
   .signin-text{
     text-align: left;
     color: #5111CC;
-    font: 
+    font-family: 'Kulim Park', sans-serif;
+    font-size: 12pt;
+
     /* padding-left: 20px; */
   }
 
@@ -56,6 +58,9 @@
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
+    font-family: 'Kulim Park', sans-serif;
+    font-display: bold;
+
   }
 
   .input-text{
@@ -63,6 +68,17 @@
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+  }
+
+  .user-container {
+    font-family: 'Kulim Park', sans-serif;
+    width: 70%;
+    margin-left: auto;
+    padding-top: 100px;
+    padding-block: 20px ;
+        color: white;
+
+
   }
   
   /* .memory-game {
@@ -75,7 +91,7 @@
   } */
 
   .memory-level-one {
-    width: 640px;
+    width: 1000px;
     height: 1040px;
     margin: auto;
     display: grid;
