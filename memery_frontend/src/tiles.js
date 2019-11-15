@@ -18,4 +18,4 @@ let tilesArray = [
 
 
 let tileBack = "./images/card-BACK.svg"
-let tileBomb = "https://media.giphy.com/media/ctomQewXM0vVm/giphy.gif"
+let tileBomb = "https://media.giphy.com/media/ceHKRKMR6Ojao/giphy.gif"

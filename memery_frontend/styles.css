@@ -5,8 +5,8 @@
   }
   
   body {
-    height: 100vh;
-    display: block;
+    /* height: 100vh;
+    display: block; */
     background: rgb(17, 139, 239);
   }
 
@@ -16,7 +16,7 @@
     margin-left: 10%;
     margin-right: 10%;
     position: relative;
-    width: 1040px;
+    width: 1000px;
     /* height: 1640px */
   }
 
@@ -80,11 +80,12 @@
 
 
   }
-  
-  /* .memory-game {
-    width: 640px;
+/*   
+  .memory-game {
+    width: 1000px;
     height: 1040px;
-    margin: auto;
+    margin-left: 20%;
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     perspective: 1000px;
@@ -93,34 +94,34 @@
   .memory-level-one {
     width: 1000px;
     height: 1040px;
-    margin: auto;
+    margin-left: 20%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     perspective: 1000px;
   }
 
   .memory-level-two {
-    width: 640px;
+    width: 1000px;
     height: 1040px;
-    margin: auto;
+    margin-left: 20%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     perspective: 1000px;
   }
   
   .memory-level-three {
-    width: 100%;
+    width: 1000px;
     height: 1040px;
-    margin: auto;
+    margin-left: 20%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     perspective: 1000px;
   }
 
   .memory-level-four {
-    width: 640px;
+    width: 1000px;
     height: 1040px;
-    margin: auto;
+    margin-left: 20%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     perspective: 1000px;

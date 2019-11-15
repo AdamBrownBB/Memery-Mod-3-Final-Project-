@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     signinContainer.hidden = false
     let userContainer = document.getElementsByClassName("user-container")[0]
     let startButton = document.getElementById("start")
-    let gameContainer = document.querySelector("section[data-name=memory-game]")
+    let gameContainer = document.querySelector("div[data-name=memory-game]")
     let userH3 = document.getElementById("user-name")
     let levelH4 = document.getElementById("level")
     let scoreH4 = document.getElementById("score")
@@ -181,10 +181,10 @@ document.addEventListener('DOMContentLoaded', () => {
       //shuffle cards
       (function shuffleCards() {
         
-        // cards.forEach(card => {
-        //   let ramdomPos = Math.floor(Math.random() * cards.length);
-        //   card.style.order = ramdomPos;
-        // });
+        cards.forEach(card => {
+          let ramdomPos = Math.floor(Math.random() * cards.length);
+          card.style.order = ramdomPos;
+        });
         cards = []
       })()//end of shuffleCards
 
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!firstCard && !secondCard) {
         firstCard = event.target.parentNode.querySelector("img[data-name=front]")
-        debugger
+        
         firstCard.parentNode.removeEventListener("click", flipCard)
 
         if (firstCard.src === tileBomb){
