@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let userH3 = document.getElementById("user-name")
     let levelH4 = document.getElementById("level")
     let scoreH4 = document.getElementById("score")
+    let winMessageDiv = document.getElementsByClassName("win-message")[0]
     let firstCard
     let secondCard
     let matchCounter=0
@@ -125,14 +126,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       let numTiles = (currentLevel+2)**2
       currentScore = numTiles*10
+      console.log(currentScore)
 
-      let winMessageDiv = document.createElement("div")
-      winMessageDiv.className = "win-message"
+      // let winMessageDiv = document.createElement("div")
+      // winMessageDiv.className = "win-message"
 
       let winMessage = document.createElement("h1")
       winMessageDiv.appendChild(winMessage)
-      gameContainer.appendChild(winMessageDiv)
-      winMessageDiv.style.display = "none"
+      // userContainer.appendChild(winMessageDiv)
+      winMessageDiv.hidden = true
 
       let i
       let j
@@ -181,10 +183,10 @@ document.addEventListener('DOMContentLoaded', () => {
       //shuffle cards
       (function shuffleCards() {
         
-        cards.forEach(card => {
-          let ramdomPos = Math.floor(Math.random() * cards.length);
-          card.style.order = ramdomPos;
-        });
+        // cards.forEach(card => {
+        //   let ramdomPos = Math.floor(Math.random() * cards.length);
+        //   card.style.order = ramdomPos;
+        // });
         cards = []
       })()//end of shuffleCards
 
@@ -282,9 +284,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // setTimeout(() => {
         startButton.style.display = "block"
 
-        let winMessageDiv = document.getElementsByClassName("win-message")[0]
+        // let winMessageDiv = document.getElementsByClassName("win-message")[0]
         winMessageDiv.children[0].innerHTML = `YOU WON! <br> You scored ${currentScore} points!!! <br> Click Start Game button to go to the next level <br>`
-        winMessageDiv.style.display = "block"
+        winMessageDiv.hidden = false
         // gameContainer.innerHTML = ""
         
       // }, 2000);
@@ -312,12 +314,14 @@ document.addEventListener('DOMContentLoaded', () => {
       let bombImg = document.createElement("img")
       bombImg.src = tileBomb
       bombGifDiv.appendChild(bombImg)
+      loseMessageDiv.appendChild(bombGifDiv)
 
       gameContainer.appendChild(loseMessageDiv)
-      gameContainer.appendChild(bombGifDiv)
+      // gameContainer.appendChild(bombGifDiv)
 
       //resets match counter to 0
       matchCounter = 0
+      currentScore = 0
     }//end of lose function
 
   })//end of DOM Loading
