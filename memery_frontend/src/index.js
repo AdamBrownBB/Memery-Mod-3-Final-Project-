@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
           let front = document.createElement("img")
           front.src = tileBomb
           front.className = "front-face"
+          front.dataset.name = "front"
 
           let back = document.createElement("img")
           back.src = tileBack
@@ -197,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!firstCard && !secondCard) {
         firstCard = event.target.parentNode.querySelector("img[data-name=front]")
+        debugger
         firstCard.parentNode.removeEventListener("click", flipCard)
 
         if (firstCard.src === tileBomb){

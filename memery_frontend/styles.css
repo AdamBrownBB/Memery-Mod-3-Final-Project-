@@ -1,17 +1,17 @@
 * {
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
   }
   
   body {
     height: 100vh;
-    display: flex;
+    display: block;
     background: rgb(17, 139, 239);
   }
 
   .app{
-    display: flex;
+    display: block;
     flex-direction: column;
     margin-left: 10%;
     margin-right: 10%;
