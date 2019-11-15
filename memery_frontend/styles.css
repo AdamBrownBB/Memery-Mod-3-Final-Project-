@@ -16,10 +16,53 @@
     margin-left: 10%;
     margin-right: 10%;
     position: relative;
+    width: 1040px;
+    /* height: 1640px */
+  }
+
+  .header{
+    display: block;
+    width: 70%;
+    margin-left: auto;
   }
 
   .signin-container{
-    padding-top: 10vh;
+    width: 70%;
+    margin-left: 20%;
+  }
+
+  .signin-form{
+    width: 70%;
+    margin-left: auto;
+  }
+  .signup-form{
+    width: 70%;
+    margin-left: auto;
+    padding-top: 100px;
+  }
+  .signin-text{
+    text-align: left;
+    color: #5111CC;
+    font: 
+    /* padding-left: 20px; */
+  }
+
+  .button{
+    background-color: #FF3131; /* Green */
+    border: none;
+    color: #5111CC;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+  }
+
+  .input-text{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
   }
   
   /* .memory-game {
@@ -50,7 +93,7 @@
   }
   
   .memory-level-three {
-    width: 640px;
+    width: 100%;
     height: 1040px;
     margin: auto;
     display: grid;

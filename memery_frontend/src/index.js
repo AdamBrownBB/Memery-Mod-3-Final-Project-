@@ -2,8 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let gamesURL = "http://localhost:3000/games"
     let usersURL = "http://localhost:3000/users"
-    const signinForm = document.getElementsByClassName("signin-form")[0]
+    let signinForm = document.getElementsByClassName("signin-form")[0]
     const signupForm = document.getElementsByClassName("signup-form")[0]
+    const signinContainer = document.getElementsByClassName("signin-container")[0]
+    signinContainer.hidden = false
     let userContainer = document.getElementsByClassName("user-container")[0]
     let startButton = document.getElementById("start")
     let gameContainer = document.querySelector("section[data-name=memory-game]")
@@ -46,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       })
     }
-
+    
     function signupHandler(event){
       event.preventDefault()
       let newUser = event.target[0].value
@@ -65,10 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
       
       event.target.reset()
     }
-
+    
     function renderUserInfo(element){
-      signinForm.style.display = "none"
-      signupForm.style.display = "none"
+      signinContainer.hidden = true
+      // signinForm.style.display = "none"
+      // signupForm.style.display = "none"
       userContainer.style.display = "block"
 
       userH3.innerText = `Welcome, ${element.name}`
