@@ -176,8 +176,7 @@
   }
 
   .win-message {
-      position: top;
-    z-index: 10000;
+      /* position: top; */
   }
 
   .lose-message{

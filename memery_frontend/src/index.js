@@ -126,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       let numTiles = (currentLevel+2)**2
       currentScore = numTiles*10
-      console.log(currentScore)
 
       // let winMessageDiv = document.createElement("div")
       // winMessageDiv.className = "win-message"
@@ -136,9 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // userContainer.appendChild(winMessageDiv)
       winMessageDiv.hidden = true
 
-      let i
-      let j
-      let k
+      let i, j, k
+      // let j
+      // let k
       for (j=1; j<=2; j++){
         for (i=0; i<((numTiles-currentLevel)/2); i++){
           let cardDiv = document.createElement("div")
@@ -183,10 +182,10 @@ document.addEventListener('DOMContentLoaded', () => {
       //shuffle cards
       (function shuffleCards() {
         
-        // cards.forEach(card => {
-        //   let ramdomPos = Math.floor(Math.random() * cards.length);
-        //   card.style.order = ramdomPos;
-        // });
+        cards.forEach(card => {
+          let ramdomPos = Math.floor(Math.random() * cards.length);
+          card.style.order = ramdomPos;
+        });
         cards = []
       })()//end of shuffleCards
 
