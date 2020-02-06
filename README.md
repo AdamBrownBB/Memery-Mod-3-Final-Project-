@@ -16,4 +16,4 @@ To start:
 
 * run ```cd ..``` and cd into the 'memery_frontend' folder
 
-* run ```npm start``` and go to [http://localhost:3001](http://localhost:3001) to start playing
+* run ```open index.html``` and go to your active browser window which should have automatically opened the index.html file, and you can start playing
