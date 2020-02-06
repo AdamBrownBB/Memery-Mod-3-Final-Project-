@@ -175,9 +175,9 @@
     transform: rotateY(180deg);
   }
 
-  .win-message {
+  /* .win-message {
       /* position: top; */
-  }
+  /* } */
 
   .lose-message{
     width: 600px;
