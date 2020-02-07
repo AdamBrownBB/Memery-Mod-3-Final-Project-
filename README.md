@@ -1,6 +1,6 @@
-# Memery-Mod-3-Final-Project
+# Memery
 
-DEMO LINK: https://youtu.be/-M2msuFkRIk
+## DEMO LINK: https://youtu.be/-M2msuFkRIk
 
 Welcome to Memery, a meme- and gif-matching memory game.
 
