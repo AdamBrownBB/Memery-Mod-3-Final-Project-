@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     signinContainer.hidden = false
     let userContainer = document.getElementsByClassName("user-container")[0]
     let startButton = document.getElementById("start")
+    let logoutButton = document.getElementById("logout")
     let gameContainer = document.querySelector("div[data-name=memory-game]")
     let userH3 = document.getElementById("user-name")
     let levelH4 = document.getElementById("level")
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     signinForm.addEventListener("submit", signinHandler)
     signupForm.addEventListener("submit", signupHandler)
+    logoutButton.addEventListener("click", logoutHandler)
 
     function signinHandler(event){
       event.preventDefault()
@@ -68,7 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
       
       event.target.reset()
     }
-    
+
+    function logoutHandler(){
+      console.log("signout")
+      signinContainer.hidden = false
+      gameContainer.style.display = "none"
+      userContainer.style.display = "none"
+      startButton.style.display = "block"
+    } 
+
     function renderUserInfo(element){
       signinContainer.hidden = true
       // signinForm.style.display = "none"
