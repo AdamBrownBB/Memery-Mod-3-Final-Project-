@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
       startButton.style.display = "none"
       gameContainer.style.display = "grid"
       gameContainer.innerHTML = ""
+      logoutButton.style.display = "block"
       switch (currentLevel) {
         case 1:
           gameContainer.className = "memory-level-one"
@@ -293,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // setTimeout(() => {
         startButton.style.display = "block"
 
+
         // let winMessageDiv = document.getElementsByClassName("win-message")[0]
         winMessageDiv.children[0].innerHTML = `YOU WON! <br> You scored ${currentScore} points!!! <br> Click Start Game button to go to the next level <br>`
         winMessageDiv.hidden = false
@@ -309,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
       //make the Start button show again
       //show a banner: you hit the bomb, to play again, press Start
       startButton.style.display = "block"
+
 
       gameContainer.innerHTML = ""
 

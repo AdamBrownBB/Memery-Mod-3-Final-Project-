@@ -1,7 +1,7 @@
 let tilesArray = [
 "https://media.giphy.com/media/XcAskcEyoyld03drLt/giphy.gif", 
 "https://media.giphy.com/media/ZbUIi5RuPahtCN90OL/giphy.gif",
-"https://media.giphy.com/media/l3mZdSnHSavSnJdEk/giphy.gif",
+"https://media.giphy.com/media/m9cs4u2lCXO3srShYL/giphy.gif",
 "https://media.giphy.com/media/QQAF6WHwL11m0/giphy.gif",
 "https://media.giphy.com/media/maCYwFHEKweaY/giphy.gif",
 "https://media.giphy.com/media/3o6ZtoUP01FNWHjL6U/giphy.gif",
