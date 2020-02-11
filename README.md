@@ -1,6 +1,6 @@
 # Memery
 
-## DEMO LINK: https://youtu.be/-M2msuFkRIk
+## DEMO LINK:
 
 Welcome to Memery, a meme- and gif-matching memory game.
 
