@@ -5,19 +5,22 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+/memery/.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+/memery/log/*
+/memery/tmp/*
+!/memery/log/.keep
+!/memery/tmp/.keep
 
 # Ignore uploaded files in development
-/storage/*
-!/storage/.keep
+/memery/storage/*
+!/memery/storage/.keep
 
-.byebug_history
+/memery/.byebug_history
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
+/memery/config/master.key
+
+# FRONT END
+/memery_frontend/node_modules/**
