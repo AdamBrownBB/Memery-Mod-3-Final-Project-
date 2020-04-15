@@ -5,6 +5,18 @@ why did bundle install take so long?
 
 had to do bundle install --path (said it was deprecated)
 
+```
+Your user account isn't allowed to install to the system RubyGems.
+  You can cancel this installation and run:
+
+      bundle install --path vendor/bundle
+
+  to install the gems into ./vendor/bundle/, or you can enter your password
+  and install the bundled gems to RubyGems using sudo.
+
+  Password: 
+```
+
 no database was running
 was trying to connect to unix socket 
 
