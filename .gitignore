@@ -22,5 +22,9 @@
 # Ignore master key for decrypting credentials and more.
 /memery/config/master.key
 
+# 3rd party packages???
+memery/vendor
+
 # FRONT END
 /memery_frontend/node_modules/**
+
