@@ -14,7 +14,13 @@ then
 ActiveRecord::PendingMigrationError (
 
 Migrations are pending. To resolve this issue, run:
-
-        bin/rails db:migrate RAILS_ENV=development
-
+    bin/rails db:migrate RAILS_ENV=development
 ):
+
+maybe include a note about enabling different environments ?
+[database file](memery/config/database.yml)
+
+
+## part 02 (front end)
+
+can you have the rails server also serve up the react app? VS having to open in via the terminal ?
