@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    let gamesURL = "http://localhost:3000/games"
+    let gamesURL = "http://localhost:3000/games" 
     let usersURL = "http://localhost:3000/users"
     let signinForm = document.getElementsByClassName("signin-form")[0]
     const signupForm = document.getElementsByClassName("signup-form")[0]
@@ -28,16 +28,19 @@ document.addEventListener('DOMContentLoaded', () => {
     signupForm.addEventListener("submit", signupHandler)
     logoutButton.addEventListener("click", logoutHandler)
 
-    function signinHandler(event){
+    function signinHandler(event){ // can you use async await in the browser?
       event.preventDefault()
       const userName = event.target[0].value
       //fetch users
-      fetch(usersURL)
+      fetch(usersURL) // add error handling here, what if the user can't be fetched
       .then(resp => resp.json())
       .then(data => {
+        console.log("data is: ", data) // I can create two brian users, also the api shouldn't return all the users here
+        // the api should be able to GET a specific user
         let user 
         data.find(function(element){
-          if (element.name === userName){
+          if (element.name === userName){ // what if we had 1 million users? the api call would probably only return 500 at a time, we'd have to 
+          // iterate through paginated responses
             user = element
           }
         })
@@ -63,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify({name: newUser})
       })
-      .then(resp => resp.json())
+      .then(resp => resp.json())  // again error handling
       .then(data => {
         renderUserInfo(data)
       })
@@ -135,10 +138,10 @@ document.addEventListener('DOMContentLoaded', () => {
           gameContainer.className = "memory-level-four"
           break;
       }
-      let numTiles = (currentLevel+2)**2
+      let numTiles = (currentLevel+2)**2 // ! hunh? what is '**'
       currentScore = numTiles*10
 
-      // let winMessageDiv = document.createElement("div")
+      // let winMessageDiv = document.createElement("div")  // ! remove commented out code
       // winMessageDiv.className = "win-message"
 
       let winMessage = document.createElement("h1")
@@ -150,6 +153,12 @@ document.addEventListener('DOMContentLoaded', () => {
       // let j
       // let k
       for (j=1; j<=2; j++){
+        /**
+         * ! consider dividing each of this loop blocks into aptly named helper methods
+         * maybe it could just be one method? (not super hot on this its ok to repeat yourself 2-3 times)
+         * after that you should get dry
+         * maybe somethings like "  generateCard(tileImage)  "
+         */
         for (i=0; i<((numTiles-currentLevel)/2); i++){
           let cardDiv = document.createElement("div")
           cardDiv.className = "memory-card"
@@ -245,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
           secondCard=undefined
           lose()
         }
-        else {
+        else { // ! what does this else block do ? 
           let cardsArray = Array.from(gameContainer.children)
 
           cardsArray.forEach(function(element){
@@ -291,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
 
       //show a message after delay
-      // setTimeout(() => {
+      // setTimeout(() => { //! remove commented out code if not needed 
         startButton.style.display = "block"
 
 
